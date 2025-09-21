@@ -1,0 +1,15 @@
+# Core AI/ML dependencies
+openai-whisper>=20230918
+
+# Audio processing
+sounddevice>=0.4.6
+soundfile>=0.12.1
+numpy>=1.24.0
+
+# GUI automation and input
+pyautogui>=0.9.54
+pyperclip>=1.8.2
+pynput>=1.7.6
+
+# Additional utilities
+pathlib>=1.0.1

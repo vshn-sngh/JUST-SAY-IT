@@ -1,0 +1,21 @@
+{
+    "hotkey": "<ctrl>+<alt>+v",
+    "audio": {
+        "sample_rate": 16000,
+        "channels": 1,
+        "device_index": null,
+        "noise_reduction_level": 1,
+        "silence_threshold": -40
+    },
+    "whisper": {
+        "model": "small",
+        "language": null
+    },
+    "typing": {
+        "speed": 0.05
+    },
+    "logging": {
+        "level": "INFO",
+        "file": "/home/vshnsngh/Desktop/Coding/voice-to-text-system/logs/voice-to-text.log"
+    }
+}

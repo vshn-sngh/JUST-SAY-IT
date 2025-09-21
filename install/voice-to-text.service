@@ -1,0 +1,54 @@
+[Unit]
+Description=Voice-to-Text System with Whisper
+Documentation=man:voice-to-text(1)
+After=network.target sound.target pulseaudio.service
+Wants=network.target sound.target
+
+[Service]
+# Service configuration
+Type=simple
+User=root
+Group=root
+
+# Working directory and execution
+WorkingDirectory=/opt/voice-to-text-system
+ExecStart=/opt/voice-to-text-system/venv/bin/python /opt/voice-to-text-system/main.py --config /etc/voice-to-text-system --daemon
+ExecStop=/bin/kill -TERM $MAINPID
+ExecReload=/bin/kill -HUP $MAINPID
+
+# Runtime configuration
+Restart=always
+RestartSec=10
+KillMode=process
+TimeoutStopSec=30
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/var/log/voice-to-text-system /tmp
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+# Resource limits
+LimitNOFILE=65536
+MemoryMax=2G
+CPUQuota=200%
+
+# Environment
+Environment=PYTHONPATH=/opt/voice-to-text-system
+Environment=PYTHONUNBUFFERED=1
+Environment=HOME=/opt/voice-to-text-system
+
+# Audio and GUI access
+SupplementaryGroups=audio pulse-access
+
+# Logging
+StandardOutput=append:/var/log/voice-to-text-system/service.log
+StandardError=append:/var/log/voice-to-text-system/service.log
+SyslogIdentifier=voice-to-text
+
+[Install]
+WantedBy=multi-user.target
